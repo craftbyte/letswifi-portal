@@ -113,7 +113,7 @@ class RealmManager extends DatabaseStorage
 	public function getRealmsByServerName( array $serverNames ): array
 	{
 		return \array_map(
-				function ( $r ) { return new Realm( $this, $r ); },
+				fn ( $r ) => new Realm( $this, $r ),
 				\array_unique( $this->getFieldsFromTableWhere( 'realm_server_name', 'realm', ['server_name' => $serverNames] ) ),
 			);
 	}
@@ -207,9 +207,7 @@ class RealmManager extends DatabaseStorage
 		$entries = $this->getValidOAuthKeys( $realm, $now );
 		\usort(
 				$entries,
-				static function ( array $a, array $b ): int {
-					return (int)( $a['issued'] - $b['issued'] );
-				},
+				static fn ( array $a, array $b ): int => (int)( $a['issued'] - $b['issued'] ),
 			);
 
 		$key = \end( $entries )['key'];

@@ -133,7 +133,7 @@ class EapConfigGenerator extends AbstractGenerator
 		if ( $network instanceof SSIDNetwork ) {
 			return static::generateSSIDNetworkXml( $network );
 		}
-		throw new InvalidArgumentException( 'Unsupported network: ' . \get_class( $network ) );
+		throw new InvalidArgumentException( 'Unsupported network: ' . $network::class );
 	}
 
 	private static function generateHS20NetworkXml( HS20Network $network ): string
@@ -161,7 +161,7 @@ class EapConfigGenerator extends AbstractGenerator
 			return static::generateTlsAuthenticationMethodXml( $authenticationMethod );
 		}
 
-		throw new InvalidArgumentException( 'Unsupported authentication method: ' . \get_class( $authenticationMethod ) );
+		throw new InvalidArgumentException( 'Unsupported authentication method: ' . $authenticationMethod::class );
 	}
 
 	/**

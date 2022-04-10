@@ -63,7 +63,6 @@ abstract class AbstractAuth implements Auth
 		}
 
 		$cutted = \substr( $pem, 27, -25 );
-		\assert( false !== $cutted, 'PEM string too short?!' );
 
 		return \str_replace( ["\n", "\r"], ['', ''], $cutted );
 	}

@@ -49,7 +49,7 @@ if ( 'GET' === $_SERVER['REQUEST_METHOD'] && isset( $_GET['download'] ) ) {
 		$earliestOkTime = \time() - 60; // allow cookies up to 60 seconds old
 		if ( \time() >= $cookieTime && $cookieTime >= $earliestOkTime ) {
 			$fakeMethod = 'POST';
-			//$fakeDevice = (string)$_GET['device'];
+			// $fakeDevice = (string)$_GET['device'];
 			$fakeDevice = 'apple-mobileconfig';
 		}
 	}

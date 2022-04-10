@@ -57,7 +57,7 @@ simplesamlphp:
 # Code formatters, static code sniffers etc.
 
 check-php:
-	@php -r 'exit(json_decode("true") === true ? 0 : 1);'
+	@php -r 'curl_init();exit(json_decode(mb_substr("💠true", 1)) === true ? 0 : 1);'
 .PHONY: check-php
 
 psalm: vendor

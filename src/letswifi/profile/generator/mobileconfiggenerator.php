@@ -38,7 +38,7 @@ class MobileConfigGenerator extends AbstractGenerator
 		$caCertificates = [];
 		$tlsAuthMethods = \array_filter(
 				$this->authenticationMethods,
-				static function ( $a ) { return $a instanceof TlsAuth && null !== $a->getPKCS12(); },
+				static fn ( $a ) => $a instanceof TlsAuth && null !== $a->getPKCS12(),
 			);
 		if ( 1 !== \count( $tlsAuthMethods ) ) {
 			throw new InvalidArgumentException( 'Expected 1 TLS auth method, got ' . \count( $tlsAuthMethods ) );
@@ -116,7 +116,7 @@ class MobileConfigGenerator extends AbstractGenerator
 			. "\n";
 
 		$uuids = \array_map(
-				static function ( $_ ){ return static::uuidgen(); },
+				static fn ( $_ ) => static::uuidgen(),
 				\array_fill( 0, \count( $caCertificates ), null ),
 			);
 		/** @var array<string,\fyrkat\openssl\X509> */
@@ -187,7 +187,7 @@ class MobileConfigGenerator extends AbstractGenerator
 				} elseif ( $network instanceof HS20Network ) {
 					$payloadDisplayName = 'roaming via Passpoint';
 				} else {
-					throw new InvalidArgumentException( 'Only SSID or Hotspot 2.0 networks are supported, got ' . \get_class( $network ) );
+					throw new InvalidArgumentException( 'Only SSID or Hotspot 2.0 networks are supported, got ' . $network::class );
 				}
 				$result .= '				</array>'
 					. "\n" . '			</dict>'
@@ -234,7 +234,7 @@ class MobileConfigGenerator extends AbstractGenerator
 					. "\n" . '		</dict>'
 					. "\n";
 			} else {
-				throw new InvalidArgumentException( 'Only SSID or Hotspot 2.0 networks are supported, got ' . \get_class( $network ) );
+				throw new InvalidArgumentException( 'Only SSID or Hotspot 2.0 networks are supported, got ' . $network::class );
 			}
 			++$payloadNetworkCount;
 		}

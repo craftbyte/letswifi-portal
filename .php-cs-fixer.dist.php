@@ -23,8 +23,8 @@ EOD
 		'@PSR2' => true,
 		'@Symfony' => true,
 		'@Symfony:risky' => true,
-		'@PHP73Migration' => true,
-		'@PHP71Migration:risky' => true,
+		'@PHP81Migration' => true,
+		'@PHP80Migration:risky' => true,
 		'align_multiline_comment' => [
 			'comment_type' => 'all_multiline',
 		],

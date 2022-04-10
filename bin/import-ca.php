@@ -1,5 +1,14 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
+
+/*
+ * This file is part of letswifi; a system for easy eduroam device enrollment
+ *
+ * Copyright: 2018-2022, Jørn Åne de Jong <jorn.dejong@letswifi.eu>
+ * Copyright: 2020-2022, Paul Dekkers, SURF <paul.dekkers@surf.nl>
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
 if ( \PHP_SAPI !== 'cli' ) {
 	\header( 'Content-Type: text/plain', true, 403 );
 	exit( "403 Forbidden\r\n\r\nThis script is intended to be run from the commandline only\r\n");
@@ -22,12 +31,8 @@ $stdin = \file_get_contents( 'php://stdin' );
 \preg_match_all( '/(^|\n)-----BEGIN( EC)? PRIVATE KEY-----\n.*?\n-----END\1 PRIVATE KEY-----($|\n)/sm', $stdin, $keys );
 \preg_match_all( '/(^|\n)-----BEGIN CERTIFICATE-----\n.*?\n-----END CERTIFICATE-----($|\n)/sm', $stdin, $certificates );
 
-$keys = \array_map( static function ( string $key ) {
-	return new PrivateKey( $key );
-}, $keys[0] );
-$certificates = \array_map( static function ( string $certificate ) {
-	return new X509( $certificate );
-}, $certificates[0] );
+$keys = \array_map( static fn ( string $key ) => new PrivateKey( $key ), $keys[0] );
+$certificates = \array_map( static fn ( string $certificate ) => new X509( $certificate ), $certificates[0] );
 
 for ( $i = \count( $certificates ) - 1; 0 <= $i; --$i ) {
 	$x509 = $certificates[$i];

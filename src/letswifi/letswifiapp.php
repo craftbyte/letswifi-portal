@@ -75,7 +75,7 @@ class LetsWifiApp
 		$userId = $auth->requireAuth();
 		$userRealm = $auth->getRealm();
 
-		if ( null !== $userRealm && \strpos( $userRealm, '.' ) === false ) {
+		if ( null !== $userRealm && !\str_contains( $userRealm, '.' ) ) {
 			// There is no . in $userRealm, so we assume it's a subrealm,
 			// and append the current realm to it.
 			$userRealm .= '.' . $this->getRealm()->getName();
@@ -313,7 +313,7 @@ class LetsWifiApp
 				?? [\implode( \DIRECTORY_SEPARATOR, [\dirname( __DIR__, 2 ), 'tpl'] )],
 			);
 			$this->twig = new \Twig\Environment( $loader, [
-				//'cache' => '/path/to/compilation_cache',
+				// 'cache' => '/path/to/compilation_cache',
 			] );
 		}
 

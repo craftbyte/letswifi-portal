@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b15bef992022c18e4e181ae42bc6083",
+    "content-hash": "f24754e000a9ec6f53701427d3fb39f1",
     "packages": [
         {
             "name": "fyrkat/oauth-server",
@@ -5087,7 +5087,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3"
+        "php": ">=8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
